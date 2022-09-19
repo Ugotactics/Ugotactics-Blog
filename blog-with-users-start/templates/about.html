@@ -1,0 +1,31 @@
+{% include "header.html" %}
+
+  <!-- Page Header -->
+  <header class="masthead" style="background-image: url({{ url_for('static', filename='img/about-bg.jpg')}})">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="page-heading">
+            <h1>About Me</h1>
+            <em><span class="subheading">Some things you might find me doing</span></em>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <p>Ugonna is a Python programmer and a frontend and backend developer. He also tutors secondary school students in Mathematics, Chemistry and Physics.</p>
+        <p>This is a collection of his random musings and random thoughts. He enjoys reading novels and watching sci-fiction movies</p>
+        <p>When he is not coding, He spends a lot of time practicing and playing chess...A fair addiction *winks*</p>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  {% include "footer.html" %}
