@@ -14,7 +14,7 @@ from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
 import datetime as dt
 import os
-
+from dotenv import load_dotenv
 
 today = str(dt.datetime.now())
 year = today.split("-")[0]
@@ -65,7 +65,7 @@ class Comment(db.Model):
     blog_post_id = db.Column(db.Integer, db.ForeignKey('blog_posts.id'))
     blog_post = db.relationship("BlogPost", back_populates="comments_on_post")
 
-# db.create_all()
+db.create_all()
 
 @app.route('/')
 def get_all_posts():
