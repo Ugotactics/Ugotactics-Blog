@@ -24,7 +24,7 @@ Base = declarative_base()
 
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
+app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY")
 ckeditor = CKEditor(app)
 Bootstrap(app)
 
@@ -65,7 +65,7 @@ class Comment(db.Model):
     blog_post_id = db.Column(db.Integer, db.ForeignKey('blog_posts.id'))
     blog_post = db.relationship("BlogPost", back_populates="comments_on_post")
 
-db.create_all()
+# db.create_all()
 
 @app.route('/')
 def get_all_posts():
