@@ -16,7 +16,6 @@ import datetime as dt
 import os
 from dotenv import load_dotenv
 
-load_dotenv()
 
 today = str(dt.datetime.now())
 year = today.split("-")[0]
@@ -26,6 +25,7 @@ Base = declarative_base()
 
 
 app = Flask(__name__)
+load_dotenv()
 app.config['SECRET_KEY'] = os.getenv('Config_key')
 ckeditor = CKEditor(app)
 Bootstrap(app)
