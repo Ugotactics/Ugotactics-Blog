@@ -14,7 +14,6 @@ from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
 import datetime as dt
 import os
-from dotenv import load_dotenv
 
 today = str(dt.datetime.now())
 year = today.split("-")[0]
