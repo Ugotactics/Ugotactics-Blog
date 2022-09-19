@@ -26,7 +26,7 @@ Base = declarative_base()
 
 app = Flask(__name__)
 load_dotenv()
-app.config['SECRET_KEY'] = os.getenv('Config_key')
+app.config['SECRET_KEY'] = 'abcdefghijklmnop'
 ckeditor = CKEditor(app)
 Bootstrap(app)
 
