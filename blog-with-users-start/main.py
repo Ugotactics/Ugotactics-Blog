@@ -14,7 +14,6 @@ from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
 import datetime as dt
 import os
-# from dotenv import load_dotenv
 
 
 today = str(dt.datetime.now())
@@ -25,8 +24,7 @@ Base = declarative_base()
 
 
 app = Flask(__name__)
-# load_dotenv()
-app.config['SECRET_KEY'] = 'abcdefghijklmno'
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 ckeditor = CKEditor(app)
 Bootstrap(app)
 
