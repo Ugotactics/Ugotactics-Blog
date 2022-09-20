@@ -138,8 +138,6 @@ def logout():
 
 
 @app.route("/post/<int:post_id>", methods=['POST', 'GET'])
-# @login_required
-# @admin_only
 def show_post(post_id):
     requested_post = BlogPost.query.get(post_id)
     comments = Comment.query.filter_by(blog_post_id=post_id).all()
@@ -158,6 +156,7 @@ def show_post(post_id):
             db.session.add(user_comment)
             db.session.commit()
             form.comment.data = ''
+            return redirect(url_for('show_post', post_id=post_id))
         else:
             flash("You need to login to comment,Log in")
             return redirect(url_for('login'))
