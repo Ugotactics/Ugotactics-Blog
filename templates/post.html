@@ -46,14 +46,17 @@
                     </strong>
                 </div>
 
-                {% for comment in comments %}
+               {% for comment in comments %}
                 <div class="col-lg-8 col-md-10 mx-auto comment">
-                    <div class="commentList">
+                    <ul class="commentList">
+                        <li>
                             <div class="commenterImage">
-                                <img src="{{ comment.commenter.email | gravatar }}"/>{{comment.commenter.name|safe}}
+                                <img src="{{ comment.commenter.email | gravatar }}"/>
                             </div>
-                    {{comment.text|safe}}
-
+                        </li>
+                    </ul>
+                    <div>{{comment.text|safe}}
+                   <h6><span class="date sub-text">{{comment.commenter.name|safe}}</span></h6><hr></div>
                 </div>
                 {% endfor %}
 
