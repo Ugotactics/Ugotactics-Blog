@@ -2,7 +2,7 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=flask
 
 ### Flask ###
-instance/*
+blog-with-users-start/instance/blog.db
 !instance/.gitignore
 .webassets-cache
 ../pythonProject-some-refurbishing/venv/.env
