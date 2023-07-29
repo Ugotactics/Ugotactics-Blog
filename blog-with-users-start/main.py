@@ -16,17 +16,20 @@ import os
 today = str(dt.datetime.now())
 year = today.split("-")[0]
 
-
-Base = declarative_base()
+# Base = declarative_base()
 
 
 app = Flask(__name__)
+app.app_context().push()
 app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY")
 ckeditor = CKEditor(app)
 Bootstrap(app)
 
 ##CONNECT TO DB
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL", "sqlite:///blog.db")
+db_path = os.path.join(os.path.dirname(__file__), 'app.db')
+db_uri = 'sqlite:///{}'.format(db_path)
+app.config['SQLALCHEMY_DATABASE_URI'] = db_uri
+# app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL", "sqlite:///blog.db")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
@@ -38,8 +41,9 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(100), unique=True)
     password = db.Column(db.String(100))
     name = db.Column(db.String(1000))
-    posts = db.relationship("BlogPost", back_populates="author")
-    comments = db.relationship("Comment", back_populates="commenter")
+    posts = db.relationship("BlogPost", backref="author")
+    comments = db.relationship("Comment", backref="commenter")
+
 
 class BlogPost(db.Model):
     __tablename__ = "blog_posts"
@@ -50,19 +54,22 @@ class BlogPost(db.Model):
     body = db.Column(db.Text, nullable=False)
     img_url = db.Column(db.String(250), nullable=False)
     author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    author = db.relationship("User", back_populates="posts")
-    comments_on_post = db.relationship("Comment", back_populates="blog_post")
+    # author = db.relationship("User", back_populates="posts")
+    comments_on_post = db.relationship("Comment", backref="blog_post")
+
 
 class Comment(db.Model):
     __tablename__ = "comments"
     id = db.Column(db.Integer, primary_key=True)
     text = db.Column(db.Text, nullable=False)
     commenter_id = db.Column(db.Integer, db.ForeignKey("users.id"))
-    commenter = db.relationship("User", back_populates="comments")
+    # commenter = db.relationship("User", back_populates="comments")
     blog_post_id = db.Column(db.Integer, db.ForeignKey('blog_posts.id'))
-    blog_post = db.relationship("BlogPost", back_populates="comments_on_post")
+    # blog_post = db.relationship("BlogPost", back_populates="comments_on_post")
 
-# db.create_all()
+
+db.create_all()
+
 
 @app.route('/')
 def get_all_posts():
@@ -104,6 +111,7 @@ def admin_only(f):
         if current_user.id != 1:
             return abort(403)
         return f(*args, **kwargs)
+
     return decorated_function
 
 
