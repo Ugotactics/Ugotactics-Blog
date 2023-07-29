@@ -50,8 +50,7 @@
                 <div class="col-lg-8 col-md-10 mx-auto comment">
                     <div class="commentList">
                             <div class="commenterImage">
-                                <img src="{{ comment.commenter.email | gravatar }}"/>
-                                <h5><span class="date sub-text">{{comment.commenter.name|safe}}</span></h5><hr>
+                                <img src="{{ comment.commenter.email | gravatar }}"/>{{comment.commenter.name|safe}}
                             </div>
                     {{comment.text|safe}}
 
