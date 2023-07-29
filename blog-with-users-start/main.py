@@ -148,7 +148,7 @@ def show_post(post_id):
     requested_post = BlogPost.query.get(post_id)
     comments = Comment.query.filter_by(blog_post_id=post_id).all()
     gravatar = Gravatar(app,
-                        size=100,
+                        size=80,
                         rating='g',
                         default='retro',
                         force_default=False,
