@@ -40,8 +40,10 @@
                     <strong>
                         {{ ckeditor.load() }}
                         {{ ckeditor.config(name='body') }}
+                        <form method="post">
+                            {{ form.csrf_token }}
                         {{ wtf.quick_form(form, novalidate=True, button_map={"submit": "primary"}) }}
-
+                        </form>
 
                     </strong>
                 </div>
